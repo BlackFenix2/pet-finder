@@ -3,7 +3,7 @@ import BackgroundOverlay from 'components/BackgroundOverlay';
 import ImageCarousel from 'components/ImageCarousel';
 import { Pet } from 'lib/petsApi';
 import React from 'react';
-import QRCode from 'react-qr-code';
+import QrCode from './QrCode';
 
 type Props = {
   pet: Pet;
@@ -24,7 +24,7 @@ const PetDetails: React.FC<Props> = ({ pet }) => {
             Adopt {pet.name}
           </Button>
           <Text>{pet.description}</Text>
-          <QRCode value={pet.url} />
+          <QrCode value={pet.url} />
         </Stack>
       </BackgroundOverlay>
     </Box>
