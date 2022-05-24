@@ -24,6 +24,8 @@ import BackgroundOverlay from './BackgroundOverlay';
 
 type Props = {
   onSubmit: (pets: Pet[]) => void;
+  onLoad: () => void;
+  onError: (error: string) => void;
 };
 
 type FormData = {
@@ -76,11 +78,16 @@ const SearchParams = (props: Props) => {
   };
 
   const onSubmit = async (data: FormData) => {
-    const { state, city, animal, breed } = data;
-    const location = `${city}, ${state}`;
-    const result = await fetchPets(animal, location, breed);
+    props.onLoad();
+    try {
+      const { state, city, animal, breed } = data;
+      const location = `${city}, ${state}`;
+      const result = await fetchPets(animal, location, breed);
 
-    props.onSubmit(result.pets);
+      props.onSubmit(result.pets);
+    } catch (err: any) {
+      props.onError(err);
+    }
   };
 
   return (

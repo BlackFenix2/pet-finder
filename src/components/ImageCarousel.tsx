@@ -26,7 +26,7 @@ const ImageCarousel = ({ images }: Props) => {
           boxSize={400}
         />
       </Center>
-      <Center padding={3}>
+      <Center padding={3} display={images.length <= 1 ? 'none' : 'flex'}>
         <Wrap justify="center" spacing={10}>
           {images.map((image, index) => (
             <WrapItem key={image}>
