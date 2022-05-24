@@ -11,7 +11,12 @@ import SearchParams from 'components/SearchParams';
 import { Pet } from 'lib/petsApi';
 import React, { Suspense, useEffect } from 'react';
 
-type Props = {};
+type Props = {
+  state?: string;
+  city?: string;
+  animal?: string;
+  breed?: string;
+};
 
 const HomeScreen = (props: Props) => {
   const [pets, setPets] = React.useState<Pet[]>([]);
@@ -48,6 +53,12 @@ const HomeScreen = (props: Props) => {
   return (
     <Box paddingX={2} paddingY={10}>
       <SearchParams
+        defaultValues={{
+          state: props.state || 'NY',
+          city: props.city || 'Selden',
+          animal: props.animal,
+          breed: props.breed,
+        }}
         onSubmit={requestPetsSubmit}
         onLoad={() => setIsLoading(true)}
         onError={(error) => {

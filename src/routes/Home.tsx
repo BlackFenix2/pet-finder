@@ -1,12 +1,18 @@
-import { Box, Container } from '@chakra-ui/react';
-import SearchParams from 'components/SearchParams';
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import HomeScreen from 'screens/HomeScreen';
 
 type Props = {};
 
 const Home = (props: Props) => {
-  return <HomeScreen></HomeScreen>;
+  const [params] = useSearchParams();
+
+  return (
+    <HomeScreen
+      state={params.get('state')?.toString()}
+      city={params.get('city')?.toString()}
+    ></HomeScreen>
+  );
 };
 
 export default Home;

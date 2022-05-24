@@ -26,6 +26,12 @@ type Props = {
   onSubmit: (pets: Pet[]) => void;
   onLoad: () => void;
   onError: (error: string) => void;
+  defaultValues?: {
+    state?: string;
+    city?: string;
+    animal?: string;
+    breed?: string;
+  };
 };
 
 type FormData = {
@@ -42,7 +48,9 @@ const SearchParams = (props: Props) => {
     watch,
     formState: { errors },
     resetField,
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues: props.defaultValues,
+  });
 
   const color = useColorModeValue('white', 'gray.800');
 
