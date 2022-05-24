@@ -205,7 +205,7 @@ export const fetchPetById = async (id: number): Promise<Pet> => {
   const response = await client.animal.show(id);
 
   const data = response.data.animal as Animal;
-  console.log(data);
+
   return {
     id: data.id,
     name: data.name,

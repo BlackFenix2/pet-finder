@@ -8,7 +8,6 @@ import * as serviceWorker from './serviceWorker';
 const root = document.querySelector('#root')!;
 
 if (root?.hasChildNodes()) {
-  console.info('Rehydrating root...');
   hydrateRoot(
     root,
     <React.StrictMode>
@@ -17,7 +16,6 @@ if (root?.hasChildNodes()) {
     </React.StrictMode>
   );
 } else {
-  console.info('Creating root...');
   createRoot(root).render(
     <React.StrictMode>
       <ColorModeScript />

@@ -15,7 +15,6 @@ const DetailsScreen = (props: Props) => {
     if (props.id) {
       fetchPetById(parseInt(props.id))
         .then((pet) => {
-          console.log('pet', pet);
           setPet(pet);
         })
         .catch((err) => {

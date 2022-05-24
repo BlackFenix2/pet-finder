@@ -6,16 +6,19 @@ import {
   Heading,
   IconButton,
   Image,
+  LightMode,
+  Spinner,
   Stack,
   Text,
 } from '@chakra-ui/react';
 import Card from 'components/Card';
 import { Pet } from 'lib/petsApi';
-import React from 'react';
+import React, { Suspense, useEffect } from 'react';
 import ReactCardFlip from 'react-card-flip';
-import QRCode from 'react-qr-code';
 import { Link } from 'react-router-dom';
 import { FaSync, FaBarcode } from 'react-icons/fa';
+
+const QrCode = React.lazy(() => import('./QrCode'));
 
 type Props = {
   pet: Pet;
@@ -24,13 +27,7 @@ type Props = {
 const PetItem: React.FC<Props> = ({ pet }) => {
   const [isFlipped, setIsFlipped] = React.useState(false);
   return (
-    <ReactCardFlip
-      isFlipped={isFlipped}
-      cardStyles={{
-        front: { minHeight: '500px' },
-        back: { minHeight: '500px' },
-      }}
-    >
+    <ReactCardFlip isFlipped={isFlipped}>
       <Card rounded={'none'} height="500px" width={'348px'}>
         <Flex direction={'column'} height="100%">
           <Link to={`details/${pet.id}`}>
@@ -65,7 +62,11 @@ const PetItem: React.FC<Props> = ({ pet }) => {
             <Text>Scan the QR code below to adopt this pet!</Text>
           </Center>
           <Center>
-            <QRCode value={pet.url}></QRCode>
+            <Box padding={4} background="white">
+              <Suspense fallback={<Spinner></Spinner>}>
+                <QrCode value={pet.url} />
+              </Suspense>
+            </Box>
           </Center>
           <Button width="100%" onClick={() => setIsFlipped((state) => !state)}>
             Flip back
@@ -76,4 +77,4 @@ const PetItem: React.FC<Props> = ({ pet }) => {
   );
 };
 
-export default PetItem;
+export default React.memo(PetItem);

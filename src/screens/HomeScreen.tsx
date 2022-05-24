@@ -52,26 +52,28 @@ const HomeScreen = (props: Props) => {
 
   return (
     <Box paddingX={2} paddingY={10}>
-      <SearchParams
-        defaultValues={{
-          state: props.state || 'NY',
-          city: props.city || 'Selden',
-          animal: props.animal,
-          breed: props.breed,
-        }}
-        onSubmit={requestPetsSubmit}
-        onLoad={() => setIsLoading(true)}
-        onError={(error) => {
-          setIsLoading(false);
-          toast({
-            title: 'Error',
-            description: `Error fetching pets: ${error}`,
-            status: 'error',
-            duration: 9000,
-            isClosable: true,
-          });
-        }}
-      />
+      <Box paddingBottom={10}>
+        <SearchParams
+          defaultValues={{
+            state: props.state || 'NY',
+            city: props.city || 'Selden',
+            animal: props.animal,
+            breed: props.breed,
+          }}
+          onSubmit={requestPetsSubmit}
+          onLoad={() => setIsLoading(true)}
+          onError={(error) => {
+            setIsLoading(false);
+            toast({
+              title: 'Error',
+              description: `Error fetching pets: ${error}`,
+              status: 'error',
+              duration: 9000,
+              isClosable: true,
+            });
+          }}
+        />
+      </Box>
       <Center paddingTop={10} hidden={!isloading}>
         <Spinner>loading...</Spinner>
       </Center>

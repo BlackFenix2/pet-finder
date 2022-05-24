@@ -17,4 +17,4 @@ const PetList = (props: Props) => (
   </Wrap>
 );
 
-export default PetList;
+export default React.memo(PetList);

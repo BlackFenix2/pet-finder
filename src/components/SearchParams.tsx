@@ -61,7 +61,6 @@ const SearchParams = (props: Props) => {
   const [breedList, setBreedList] = React.useState<string[]>([]);
 
   useEffect(() => {
-    console.info('i mounted...');
     requestAnimalList().then((animalList) => {
       setAnimalList(animalList);
     });
@@ -70,14 +69,11 @@ const SearchParams = (props: Props) => {
 
   const resetCityList = (state: string) => {
     if (stateList.find((item) => item.isoCode === state)) {
-      console.info('i updated the city list...');
-
       setCityList(getCities(state));
     }
   };
 
   const resetBreedList = (animal: string) => {
-    console.info('i updated the breed list...');
     if (animal) {
       requestBreedList(animal).then((breedList) => {
         setBreedList(breedList);
